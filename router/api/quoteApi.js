@@ -11,7 +11,6 @@ const Quote = require('../../model/Quote');
 const ROLE_LIST = require('../../config/rolesList');
 const verifyRoles = require('../../middleware/VerifyRole')
 
-// create new quote
 router.post('/', verifyRoles(ROLE_LIST.Admin, ROLE_LIST.Editor), getAuthor.getAuthor, getCategory.getCategory,  async (req, res) => {
     try{
         const newQuote = new Quote({
@@ -28,7 +27,6 @@ router.post('/', verifyRoles(ROLE_LIST.Admin, ROLE_LIST.Editor), getAuthor.getAu
     }
 })
 
-// read all quote
 router.get('/', async(req, res) => {
     try{
         const allQuote = [];
@@ -46,7 +44,6 @@ router.get('/', async(req, res) => {
     }
 })
 
-// read by id
 router.get('/:id', async(req, res) => {
     try{
         const quote = await Quote.findById(req.params.id);
@@ -63,7 +60,6 @@ router.get('/:id', async(req, res) => {
     }
 });
 
-//update quote
 router.put('/:id', verifyRoles(ROLE_LIST.Admin, ROLE_LIST.Editor), getAuthor.getAuthor, getCategory.getCategory, async(req, res) => {
     try{
         const quoteUpdate = await Quote.findById(req.params.id)
