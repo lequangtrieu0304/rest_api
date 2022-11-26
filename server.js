@@ -20,14 +20,13 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-const verifyJWT = require('./middleware/VerifyJWT')
-
 app.use('/register', require('./router/Register'))
 app.use('/login', require('./router/Login'))
 app.use('/refresh', require('./router/Refresh'));
 app.use('/logout', require('./router/Logout'));
 
-app.use(verifyJWT.verifyJWT)
+app.use('/employee', require('./router/api/employees'));
+
 
 mongoose.connection.once('open', () => {
   console.log('Connected to MongoDB');
